@@ -1225,49 +1225,99 @@ h2.subheading {
   }
 }
 
-/* Ensure ticket element can hold absolute positioned stickers */
+/* =========================================================================
+   GIF STICKERS
+   ========================================================================= */
+
+/* Ensure ticket can hold absolute positioned stickers */
 .ticket {
-  position: relative;
-  overflow: visible !important;
+  position: relative;
+  overflow: visible !important; /* Allows stickers to overlap ticket borders */
 }
 
-/* Base sticker styling */
-.sticker-spiderman {
-  position: absolute;
-  z-index: 10;
-  pointer-events: none; /* Prevents sticker from blocking button clicks */
-  filter: drop-shadow(0 0 12px rgba(255, 0, 51, 0.5));
-  
-  /* Initial hidden state */
-  opacity: 0;
-  transform: scale(0) rotate(-10deg);
-  transition: opacity 0.2s ease;
+.sticker {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none; /* Allows user to click buttons behind stickers */
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+  
+  /* Initial hidden state */
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.3s ease;
 }
 
-/* Position on the ticket */
-.sticker-spiderman {
-  top: -25px;
-  right: -20px;
-  width: clamp(90px, 22vw, 130px);
+/* Class added by JavaScript on Accept Mission click */
+.sticker.visible {
+  animation: stickerPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Animation class added via JS after intro text finishes */
-.sticker-spiderman.pop-in {
-  animation: zoomOutSticker 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+/* Pop-in keyframe animation */
+@keyframes stickerPop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* Keyframes: Starts small/invisible, zooms out past normal size, settles into place */
-@keyframes zoomOutSticker {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(-20deg);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1.15) rotate(8deg); /* Over-expansion pop */
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(6deg); /* Final resting state */
-  }
-} where should i put this?
+.sticker img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: none;
+}
+
+/* Top-Right Sticker Positioning */
+.sticker-top-right {
+  top: -30px;
+  right: -24px;
+  width: clamp(90px, 22vw, 140px);
+}
+
+/* Bottom-Left Sticker Positioning */
+.sticker-bottom-left {
+  bottom: 80px;
+  left: -28px;
+  width: clamp(85px, 20vw, 125px);
+}
+
+/* Apply rotation after the pop animation finishes */
+.sticker-top-right.visible {
+  transform: rotate(12deg);
+}
+
+.sticker-bottom-left.visible {
+  transform: rotate(-10deg);
+}
+
+/* Hover effect for desktop */
+.ticket:hover .sticker-top-right.visible {
+  transform: rotate(16deg) scale(1.05);
+}
+.ticket:hover .sticker-bottom-left.visible {
+  transform: rotate(-14deg) scale(1.05);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .sticker-top-right {
+    top: -20px;
+    right: -10px;
+    width: 80px;
+  }
+
+  .sticker-bottom-left {
+    bottom: 120px;
+    left: -12px;
+    width: 70px;
+  }
+}
