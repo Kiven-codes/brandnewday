@@ -1259,9 +1259,9 @@ h2.subheading {
 /* 1. Spider-Man (Top-Right) Sticker Sizing & Lowered Positioning */
 .sticker-spiderman,
 .sticker-top-right {
-  top: 12px; /* Lowered from -25px so web aligns with the top border */
-  right: -20px;
-  width: clamp(85px, 20vw, 125px);
+  top: 12px; /* Keep web aligned to border */
+  right: -24px; /* Slightly adjusted right margin for bigger size */
+  width: clamp(95px, 24vw, 145px); /* INCREASED: was clamp(85px, 20vw, 125px) */
 }
 
 /* 2. Secondary (Bottom-Left) Sticker Sizing & Positioning */
@@ -1333,9 +1333,9 @@ h2.subheading {
 @media (max-width: 480px) {
   .sticker-spiderman,
   .sticker-top-right {
-    top: 8px; /* Adjusted for mobile view */
-    right: -10px;
-    width: 75px;
+    top: 8px;
+    right: -12px;
+    width: 85px; /* INCREASED: was 75px */
   }
 
   .sticker-bottom-left {
