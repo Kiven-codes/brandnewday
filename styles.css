@@ -1256,19 +1256,19 @@ h2.subheading {
   filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
 }
 
-/* 1. Spider-Man (Top-Right) Sticker Sizing & Positioning */
+/* 1. Spider-Man (Top-Right) Sticker Sizing & Lowered Positioning */
 .sticker-spiderman,
 .sticker-top-right {
-  top: -25px;
+  top: 12px; /* Lowered from -25px so web aligns with the top border */
   right: -20px;
-  width: clamp(85px, 20vw, 125px); /* Scaled down */
+  width: clamp(85px, 20vw, 125px);
 }
 
 /* 2. Secondary (Bottom-Left) Sticker Sizing & Positioning */
 .sticker-bottom-left {
   bottom: 80px;
   left: -22px;
-  width: clamp(75px, 18vw, 110px); /* Scaled down */
+  width: clamp(75px, 18vw, 110px);
 }
 
 /* =========================================================================
@@ -1333,7 +1333,7 @@ h2.subheading {
 @media (max-width: 480px) {
   .sticker-spiderman,
   .sticker-top-right {
-    top: -18px;
+    top: 8px; /* Adjusted for mobile view */
     right: -10px;
     width: 75px;
   }
