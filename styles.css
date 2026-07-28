@@ -1249,30 +1249,26 @@ h2.subheading {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 12px;
-  
-  /* STICKER BORDER & GLOW STYLING */
-  border: 2px solid var(--cyan);
-  outline: 2px solid var(--red);
-  box-shadow: 
-    0 0 12px rgba(0, 229, 255, 0.6),
-    0 0 24px rgba(255, 0, 51, 0.4),
-    inset 0 0 8px rgba(0, 229, 255, 0.3);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
 }
 
 /* 1. Spider-Man (Top-Right) Sticker Sizing & Positioning */
 .sticker-spiderman,
 .sticker-top-right {
-  top: -35px;
-  right: -28px;
-  width: clamp(110px, 28vw, 170px);
+  top: -25px;
+  right: -20px;
+  width: clamp(85px, 20vw, 125px); /* Scaled down */
 }
 
 /* 2. Secondary (Bottom-Left) Sticker Sizing & Positioning */
 .sticker-bottom-left {
   bottom: 80px;
-  left: -32px;
-  width: clamp(100px, 24vw, 150px);
+  left: -22px;
+  width: clamp(75px, 18vw, 110px); /* Scaled down */
 }
 
 /* =========================================================================
@@ -1337,14 +1333,14 @@ h2.subheading {
 @media (max-width: 480px) {
   .sticker-spiderman,
   .sticker-top-right {
-    top: -25px;
-    right: -14px;
-    width: 95px;
+    top: -18px;
+    right: -10px;
+    width: 75px;
   }
 
   .sticker-bottom-left {
-    bottom: 110px;
-    left: -16px;
-    width: 85px;
+    bottom: 100px;
+    left: -12px;
+    width: 65px;
   }
 }
