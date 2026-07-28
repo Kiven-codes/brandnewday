@@ -1239,33 +1239,11 @@ h2.subheading {
   position: absolute;
   z-index: 10;
   pointer-events: none; /* Allows user to click buttons behind stickers */
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+  filter: drop-shadow(0 0 12px rgba(255, 0, 51, 0.5));
   
   /* Initial hidden state */
   opacity: 0;
   transform: scale(0);
-  transition: transform 0.3s ease;
-}
-
-/* Class added by JavaScript on Accept Mission click */
-.sticker.visible {
-  animation: stickerPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* Pop-in keyframe animation */
-@keyframes stickerPop {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .sticker img {
@@ -1276,50 +1254,91 @@ h2.subheading {
   border: none;
 }
 
-/* Top-Right Sticker Positioning */
+/* 1. Spider-Man (Top-Right) Sticker Sizing & Positioning */
+.sticker-spiderman,
 .sticker-top-right {
-  top: -30px;
-  right: -24px;
-  width: clamp(90px, 22vw, 140px)
-  transform: rotate(12deg);
+  top: -35px;
+  right: -28px;
+  width: clamp(110px, 28vw, 170px); /* Made bigger */
 }
 
-/* Bottom-Left Sticker Positioning */
+/* 2. Secondary (Bottom-Left) Sticker Sizing & Positioning */
 .sticker-bottom-left {
   bottom: 80px;
-  left: -28px;
-  width: clamp(85px, 20vw, 125px)
-  transform: rotate(-10deg);
+  left: -32px;
+  width: clamp(100px, 24vw, 150px); /* Made bigger */
 }
 
-/* Apply rotation after the pop animation finishes */
+/* =========================================================================
+   STICKER ANIMATIONS & ROTATIONS
+   ========================================================================= */
+
+/* Class added by JavaScript on Accept Mission click */
+.sticker-spiderman.pop-in,
 .sticker-top-right.visible {
-  transform: rotate(12deg);
+  animation: spidermanPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .sticker-bottom-left.visible {
-  transform: rotate(-10deg);
+  animation: bottomStickerPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Hover effect for desktop */
+/* Top-Right Keyframes: Settles smoothly at 8deg rotation */
+@keyframes spidermanPop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-15deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.15) rotate(12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(8deg);
+  }
+}
+
+/* Bottom-Left Keyframes: Settles smoothly at -10deg rotation */
+@keyframes bottomStickerPop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(15deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.15) rotate(-14deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-10deg);
+  }
+}
+
+/* Desktop Hover Interactive Effect */
+.ticket:hover .sticker-spiderman.pop-in,
 .ticket:hover .sticker-top-right.visible {
-  transform: rotate(16deg) scale(1.05);
-}
-.ticket:hover .sticker-bottom-left.visible {
-  transform: rotate(-14deg) scale(1.05);
+  transform: rotate(14deg) scale(1.06);
+  transition: transform 0.25s ease;
 }
 
-/* Mobile Adjustments */
+.ticket:hover .sticker-bottom-left.visible {
+  transform: rotate(-14deg) scale(1.06);
+  transition: transform 0.25s ease;
+}
+
+/* Mobile Responsive Adjustments */
 @media (max-width: 480px) {
+  .sticker-spiderman,
   .sticker-top-right {
-    top: -20px;
-    right: -10px;
-    width: 80px;
+    top: -25px;
+    right: -14px;
+    width: 95px;
   }
 
   .sticker-bottom-left {
-    bottom: 120px;
-    left: -12px;
-    width: 70px;
+    bottom: 110px;
+    left: -16px;
+    width: 85px;
   }
 }
