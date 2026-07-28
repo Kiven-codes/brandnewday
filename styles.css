@@ -1,10 +1,4 @@
 :root {
-  --bg: #07090e;
-  --bg-raised: #0d1219;
-  --red: #ff0033;
-  --red-dim: #7a0019;
-  --cyan: #00e5ff;
-  --cyan-dim: #007a8a;remove the border effect of the stickers and make it a little bigger :root {
   --bg: #07090e;
   --bg-raised: #0d1219;
   --red: #ff0033;
