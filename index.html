@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPERATION: BRAND NEW DAY</title>
+
+<!-- Fonts: Orbitron for tactical display headers, Rajdhani for HUD body/mono readouts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+   AMBIENT FX LAYERS
+  <div class="web-grid-bg" aria-hidden="true"></div>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <!-- ============ AUDIO TOGGLE (fixed, always visible) ============ -->
+  <button id="audioToggle" class="audio-toggle" aria-pressed="true">
+    <span class="audio-dot"></span>
+    <span id="audioToggleLabel">AUDIO: ON</span>
+  </button>
+
+  <!-- global corner brackets for HUD framing -->
+  <div class="hud-frame" aria-hidden="true">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+  </div>
+
+  <main id="app">
+
+    <!-- ============ INTRO: GAME SPLASH / TITLE SCREEN ============ -->
+    <section class="screen active" id="screen-intro" data-screen="-1">
+      <div class="intro-wrap">
+        <div class="intro-content">
+
+          <p class="intro-studio">S.P.I.D.E.R. PRESENTS</p>
+
+          <h1 class="intro-title" data-text="SPIDER-MAN">SPIDER-MAN</h1>
+
+          <p class="intro-subtitle">BRAND NEW DAY</p>
+
+          <div class="intro-divider"></div>
+
+          <p class="intro-tagline">THE NEXT CHAPTER BEGINS</p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEP 0: IDENTITY VERIFICATION ============ -->
+    <section class="screen" id="screen-0" data-screen="0">
+      <div class="console-card glass">
+        <p class="eyebrow">S.H.I.E.L.D. // IDENTITY VERIFICATION</p>
+        <h1 class="glitch" data-text="ACCESS TERMINAL">ACCESS TERMINAL</h1>
+        <div class="divider"></div>
+        <p class="body-text">
+          Enter your agent codename to access high-clearance tactical intel.
+        </p>
+
+        <form id="codenameForm" class="codename-form" autocomplete="off">
+          <label for="codenameInput" class="field-label">AGENT CODENAME</label>
+          <input
+            type="text"
+            id="codenameInput"
+            name="codename"
+            class="tactical-input"
+            placeholder="e.g. NIGHT-OWL"
+            maxlength="20"
+            required
+          >
+          <button type="submit" class="btn btn-primary">
+            <span>VERIFY IDENTITY</span>
+          </button>
+          <p class="input-error" id="codenameError">CODENAME REQUIRED FOR CLEARANCE.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ STEP 1: TACTICAL SPLASH SCREEN ============ -->
+    <section class="screen" id="screen-1" data-screen="1">
+      <div class="console-card glass wide">
+        <p class="eyebrow eyebrow-alert">// TOP SECRET // EYES ONLY</p>
+        <h1 class="glitch" data-text="CLASSIFIED BRIEFING">CLASSIFIED BRIEFING</h1>
+        <h2 class="subheading">OPERATION: BRAND NEW DAY</h2>
+        <div class="divider"></div>
+
+        <p class="body-text briefing-text">
+          Agent <span class="codename-tag" data-role="codename-display">AGENT</span>, SPIDER MAN needs our help.
+          Your presence is required for tactical theater deployment.
+        </p>
+
+        <div class="threat-meter" aria-hidden="true">
+          <span>THREAT LEVEL</span>
+          <div class="threat-bar"><i></i></div>
+        </div>
+
+        <button id="acceptBriefingBtn" class="btn btn-primary btn-glow">
+          <span>ACCEPT BRIEFING</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ STEP 2: VIDEO STREAM + HUD COUNTDOWN ============ -->
+    <section class="screen" id="screen-2" data-screen="2">
+      <div class="console-card glass wide video-console">
+        <p class="eyebrow">LIVE FEED // SATELLITE UPLINK 07</p>
+        <h2 class="feed-title">SENSOR ANALYSIS IN PROGRESS PETER NEEDS US</h2>
+
+        <div class="video-frame">
+          <!--
+            ============================================================
+            REPLACE VIDEO SOURCE HERE:
+            Swap the src below with your local trailer file, e.g.
+            <source src="video/spiderman_trailer.mp4" type="video/mp4">
+            The placeholder path is already wired in as a clean stand-in.
+            ============================================================
+          -->
+          <video
+            id="briefingVideo"
+            class="briefing-video"
+            playsinline
+            loop
+            preload="auto"
+          >
+            <source src="SPIDER-MAN_ BRAND NEW DAY – Official Trailer (HD).mp4">
+            Your browser does not support embedded tactical video feeds.
+          </video>
+
+          <div class="video-hud" aria-hidden="true">
+            <div class="hud-row hud-top">
+              <span class="rec-dot"></span> REC
+              <span class="hud-spacer"></span>
+              <span id="countdownReadout">ANALYZING SENSORS: 02:35</span>
+            </div>
+            <div class="hud-row hud-bottom">
+              <span>UPLINK STABLE</span>
+              <span class="hud-spacer"></span>
+              <span>CAM_04 // MIDTOWN</span>
+            </div>
+            <div class="reticle"></div>
+            <div class="scan-sweep"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ STEP 3: TACTICAL OVERLAY INTERRUPT (MODAL) ============ -->
+      <div class="modal-backdrop" id="intelModal">
+        <div class="modal-card glass">
+          <p class="eyebrow eyebrow-alert">// TRANSMISSION INTERCEPTED</p>
+          <h2 class="glitch" data-text="INTEL PARAMETERS UNLOCKED">INTEL PARAMETERS UNLOCKED</h2>
+          <div class="divider"></div>
+          <p class="body-text">
+            Mission parameters retrieved. Proceed to sign official deployment agreement?
+          </p>
+          <button id="continueMissionBtn" class="btn btn-primary btn-glow">
+            <span>CONTINUE MISSION</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STEP 4: CLASSIFIED TICKET ============ -->
+    <section class="screen" id="screen-3" data-screen="3">
+      <div class="ticket-wrap">
+        <div class="ticket glass" id="ticket">
+          <div class="ticket-header">
+            <p class="eyebrow eyebrow-alert">OFFICIAL DEPLOYMENT TICKET</p>
+            <span class="stamp">CLASSIFIED</span>
+          </div>
+          <h2 class="glitch" data-text="MISSION: APPROVED">MISSION: APPROVED</h2>
+          <div class="divider"></div>
+
+          <dl class="ticket-details">
+            <div class="ticket-row">
+              <dt>ASSIGNED AGENT</dt>
+              <dd data-role="codename-display">AGENT</dd>
+            </div>
+            <div class="ticket-row">
+              <dt>TARGET EVENT</dt>
+              <dd>Spider-Man: Brand New Day</dd>
+            </div>
+            <div class="ticket-row">
+              <dt>DEPLOYMENT DATE &amp; TIME</dt>
+              <dd> Friday, July 31 &middot; 4:00 PM</dd>
+            </div>
+            <div class="ticket-row">
+              <dt>RENDEZVOUS LOCATION</dt>
+              <dd>ROBINSONS THEATER NAGA CITY</dd>
+            </div>
+            <div class="ticket-row">
+              <dt>DRESS CODE</dt>
+              <dd>Anything as long as you're comfortable.</dd>
+            </div>
+          </dl>
+
+          <div class="ticket-barcode" aria-hidden="true"></div>
+
+          <div class="ticket-actions" id="ticketActions">
+            <button id="acceptMissionBtn" class="btn btn-primary btn-glow">
+              <span>I ACCEPT THE MISSION</span>
+            </button>
+
+            <div class="decline-zone" id="declineZone">
+              <button id="declineBtn" class="btn btn-decline">
+                <span>DECLINE</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="confirmation-msg" id="confirmationMsg">ACCESS GRANTED. MISSION LOGGED SEE YOU!</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
