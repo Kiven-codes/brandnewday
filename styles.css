@@ -1280,14 +1280,16 @@ h2.subheading {
 .sticker-top-right {
   top: -30px;
   right: -24px;
-  width: clamp(90px, 22vw, 140px);
+  width: clamp(90px, 22vw, 140px)
+  transform: rotate(12deg);
 }
 
 /* Bottom-Left Sticker Positioning */
 .sticker-bottom-left {
   bottom: 80px;
   left: -28px;
-  width: clamp(85px, 20vw, 125px);
+  width: clamp(85px, 20vw, 125px)
+  transform: rotate(-10deg);
 }
 
 /* Apply rotation after the pop animation finishes */
