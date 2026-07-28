@@ -1223,3 +1223,68 @@ h2.subheading {
     padding: 2px 6px;
   }
 }
+
+/* =========================================================================
+   GIF STICKERS
+   ========================================================================= */
+
+/* Ensure ticket can hold absolute positioned stickers */
+.ticket {
+  position: relative;
+  overflow: visible !important; /* Allows stickers to overlap ticket borders */
+}
+
+.sticker {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none; /* Allows user to click buttons behind stickers */
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.sticker img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--cyan-dim);
+}
+
+/* Top-Right Sticker (Overlaps header/stamp) */
+.sticker-top-right {
+  top: -24px;
+  right: -16px;
+  width: clamp(70px, 18vw, 110px);
+  transform: rotate(12deg);
+}
+
+/* Bottom-Left Sticker (Overlaps barcode/details) */
+.sticker-bottom-left {
+  bottom: 80px;
+  left: -20px;
+  width: clamp(65px, 16vw, 95px);
+  transform: rotate(-10deg);
+}
+
+/* Hover effect for desktop */
+.ticket:hover .sticker-top-right {
+  transform: rotate(16deg) scale(1.05);
+}
+.ticket:hover .sticker-bottom-left {
+  transform: rotate(-14deg) scale(1.05);
+}
+
+/* Mobile Adjustments so stickers don't cover text on tiny screens */
+@media (max-width: 480px) {
+  .sticker-top-right {
+    top: -18px;
+    right: -8px;
+    width: 65px;
+  }
+
+  .sticker-bottom-left {
+    bottom: 120px;
+    left: -10px;
+    width: 55px;
+  }
+}
