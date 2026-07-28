@@ -1323,3 +1323,50 @@ h2.subheading {
     width: 70px;
   }
 }
+
+/* Ensure ticket element can hold absolute positioned stickers */
+.ticket {
+  position: relative;
+  overflow: visible !important;
+}
+
+/* Base sticker styling */
+.sticker-spiderman {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none; /* Prevents sticker from blocking button clicks */
+  filter: drop-shadow(0 0 12px rgba(255, 0, 51, 0.5));
+  
+  /* Initial hidden state */
+  opacity: 0;
+  transform: scale(0) rotate(-10deg);
+  transition: opacity 0.2s ease;
+}
+
+/* Position on the ticket */
+.sticker-spiderman {
+  top: -25px;
+  right: -20px;
+  width: clamp(90px, 22vw, 130px);
+}
+
+/* Animation class added via JS after intro text finishes */
+.sticker-spiderman.pop-in {
+  animation: zoomOutSticker 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Keyframes: Starts small/invisible, zooms out past normal size, settles into place */
+@keyframes zoomOutSticker {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-20deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.15) rotate(8deg); /* Over-expansion pop */
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(6deg); /* Final resting state */
+  }
+}
