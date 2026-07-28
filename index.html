@@ -1,225 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OPERATION: BRAND NEW DAY</title>
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spider-Man: Tactical Deployment Console</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Ambient FX -->
-  <div class="web-grid-bg" aria-hidden="true"></div>
-  <div class="scanline-overlay" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
+  <div class="web-grid-bg"></div>
+  <div class="vignette"></div>
+  <div class="scanline-overlay"></div>
 
-  <!-- Audio Toggle -->
-  <button id="audioToggle" class="audio-toggle" aria-pressed="true">
-    <span class="audio-dot"></span>
-    <span id="audioToggleLabel">AUDIO: ON</span>
-  </button>
-
-  <!-- HUD Corner Brackets -->
-  <div class="hud-frame" aria-hidden="true">
-    <span class="corner tl"></span>
-    <span class="corner tr"></span>
-    <span class="corner bl"></span>
-    <span class="corner br"></span>
+  <!-- HUD Frame -->
+  <div class="hud-frame">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
   </div>
 
+  <!-- Audio Toggle -->
+  <button id="audioToggle" class="audio-toggle muted" aria-label="Toggle Audio">
+    <span class="audio-dot"></span>
+    <span id="audioStatus">AUDIO OFF</span>
+  </button>
+
+  <!-- Main Container -->
   <main id="app">
 
-    <!-- Screen -1: Intro Title Screen -->
-    <section class="screen active" id="screen-intro" data-screen="-1">
+    <!-- INTRO / SPLASH SCREEN -->
+    <section id="screen-intro" class="screen active">
       <div class="intro-wrap">
         <div class="intro-content">
-          <p class="intro-studio">KIB PRESENTS</p>
-          <h1 class="intro-title" data-text="SPIDER-MAN">SPIDER-MAN</h1>
-          <p class="intro-subtitle">BRAND NEW DAY</p>
+          <p class="intro-studio">SPIDER-MAN: ACROSS THE SPIDER-VERSE</p>
+          <h1 class="intro-title" data-text="MISSION BRIEFING">MISSION BRIEFING</h1>
+          <p class="intro-subtitle">SPIDER-SOCIETY DEPLOYMENT</p>
           <div class="intro-divider"></div>
-          <p class="intro-tagline">THE NEXT CHAPTER BEGINS</p>
+          <p class="intro-tagline">CLASSIFIED TRANSMISSION // LEVEL 5 CLEARANCE REQUIRED</p>
+          <p class="intro-prompt" id="startBtn">
+            <span class="prompt-arrow">&gt;</span> CLICK TO INITIALIZE SECURE FEED <span class="prompt-blink">_</span>
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Step 0: Identity Verification -->
-    <section class="screen" id="screen-0" data-screen="0">
+    <!-- STEP 1: CODENAME REGISTRATION -->
+    <section id="screen-step1" class="screen">
       <div class="console-card glass">
-        <p class="eyebrow">S.H.I.E.L.D. // IDENTITY VERIFICATION</p>
-        <h1 class="glitch" data-text="ACCESS TERMINAL">ACCESS TERMINAL</h1>
+        <p class="eyebrow">STEP 01 // CLEARANCE AUTHENTICATION</p>
+        <h1 class="glitch" data-text="REGISTER CODENAME">REGISTER CODENAME</h1>
+        <h2 class="subheading">SPIDER-SOCIETY ACCESS CONTROL</h2>
         <div class="divider"></div>
+
+        <div class="threat-meter">
+          <span>THREAT LEVEL: ANOMALY</span>
+          <div class="threat-bar"><i></i></div>
+          <span>87%</span>
+        </div>
+
         <p class="body-text">
-          Enter your agent codename to access high-clearance tactical intel.
+          Enter your designated Spider-Alias to unlock classified mission data and review target protocol briefing.
         </p>
 
-        <form id="codenameForm" class="codename-form" autocomplete="off">
-          <label for="codenameInput" class="field-label">AGENT CODENAME</label>
-          <input
-            type="text"
-            id="codenameInput"
-            name="codename"
-            class="tactical-input"
-            placeholder="e.g. KIB"
-            maxlength="20"
+        <form id="step1Form" class="codename-form" onsubmit="return false;">
+          <label for="codenameInput" class="field-label">AGENT DESIGNATION / CODENAME</label>
+          <input 
+            type="text" 
+            id="codenameInput" 
+            class="tactical-input" 
+            placeholder="e.g. SPIDER-PUNK, GHOST-SPIDER" 
+            maxlength="24" 
+            autocomplete="off" 
             required
           >
-          <button type="submit" class="btn btn-primary">
-            <span>VERIFY IDENTITY</span>
-          </button>
-          <p class="input-error" id="codenameError">CODENAME REQUIRED FOR CLEARANCE.</p>
+          <p id="inputError" class="input-error">ENTER A VALID CODENAME TO PROCEED.</p>
+          <button type="submit" id="step1Submit" class="btn btn-primary btn-glow">AUTHENTICATE &amp; CONTINUE &gt;</button>
         </form>
       </div>
     </section>
 
-    <!-- Step 1: Tactical Splash Screen -->
-    <section class="screen" id="screen-1" data-screen="1">
-      <div class="console-card glass wide">
-        <p class="eyebrow eyebrow-alert">// TOP SECRET // EYES ONLY</p>
-        <h1 class="glitch" data-text="CLASSIFIED BRIEFING">CLASSIFIED BRIEFING</h1>
-        <h2 class="subheading">OPERATION: BRAND NEW DAY</h2>
+    <!-- STEP 2: VIDEO BRIEFING -->
+    <section id="screen-step2" class="screen">
+      <div class="console-card glass wide video-console">
+        <p class="eyebrow">STEP 02 // VISUAL RECONNAISSANCE</p>
+        <h1 id="step2Title">MISSION BRIEFING: <span class="codename-tag" id="displayCodename1">AGENT</span></h1>
         <div class="divider"></div>
 
-        <p class="body-text briefing-text">
-          Agent <span class="codename-tag" data-role="codename-display">AGENT</span>, SPIDER MAN needs our help.
-          Your presence is required for tactical theater deployment.
-        </p>
-
-        <div class="threat-meter" aria-hidden="true">
-          <span>THREAT LEVEL</span>
-          <div class="threat-bar"><i></i></div>
-        </div>
-
-        <button id="acceptBriefingBtn" class="btn btn-primary btn-glow">
-          <span>ACCEPT BRIEFING</span>
-        </button>
-      </div>
-    </section>
-
-    <!-- Step 2: Video Feed & Countdown -->
-    <section class="screen" id="screen-2" data-screen="2">
-      <div class="console-card glass wide video-console">
-        <p class="eyebrow">LIVE FEED // SATELLITE UPLINK 07</p>
-        <h2 class="feed-title">SENSOR ANALYSIS IN PROGRESS, PETER NEEDS US!</h2>
-
         <div class="video-frame">
-          <video
-            id="briefingVideo"
-            class="briefing-video"
-            playsinline
-            loop
-            preload="auto"
-          >
-            <source src="SPIDER-MAN_ BRAND NEW DAY – Official Trailer (HD).mp4">
-            Your browser does not support embedded tactical video feeds.
+          <video id="briefingVideo" class="briefing-video" controls playsinline preload="metadata">
+            <source src="spiderverse_trailer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
           </video>
-
-          <div class="video-hud" aria-hidden="true">
+          
+          <div class="video-hud">
             <div class="hud-row hud-top">
-              <span class="rec-dot"></span> REC
+              <span class="rec-dot"></span>
+              <span>LIVE FEED // SECTOR 1610</span>
               <span class="hud-spacer"></span>
-              <span id="countdownReadout">ANALYZING SENSORS: 02:35</span>
-            </div>
-            <div class="hud-row hud-bottom">
-              <span>UPLINK STABLE 10</span>
-              <span class="hud-spacer"></span>
-              <span>CAM_05 // NAGA CITY</span>
+              <span>HD 1080p</span>
             </div>
             <div class="reticle"></div>
             <div class="scan-sweep"></div>
+            <div class="hud-row hud-bottom">
+              <span>TARGET: THE SPOT</span>
+              <span class="hud-spacer"></span>
+              <span id="countdownReadout">AUTO-PROCEED: --s</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Step 3: Tactical Overlay Modal -->
-      <div class="modal-backdrop" id="intelModal">
-        <div class="modal-card glass">
-          <p class="eyebrow eyebrow-alert">// TRANSMISSION INTERCEPTED</p>
-          <h2 class="glitch" data-text="INTEL PARAMETERS UNLOCKED">INTEL PARAMETERS UNLOCKED</h2>
-          <div class="divider"></div>
-          <p class="body-text">
-            Mission parameters retrieved. Proceed to sign official deployment agreement?
-          </p>
-          <button id="continueMissionBtn" class="btn btn-primary btn-glow">
-            <span>CONTINUE MISSION</span>
-          </button>
-        </div>
+        <p class="body-text briefing-text" style="margin-top: 18px;">
+          Analyze the operative feed above. MULTIVERSE DEPLOYMENT IS IMMINENT.
+        </p>
+
+        <button id="step2Proceed" class="btn btn-primary btn-glow">INITIALIZE DEPLOYMENT TICKET &gt;</button>
       </div>
     </section>
 
-    <!-- Step 4: Classified Ticket -->
-    <section class="screen" id="screen-3" data-screen="3">
+    <!-- STEP 3: INTERCEPT MODAL -->
+    <div id="interceptModal" class="modal-backdrop">
+      <div class="modal-card glass">
+        <p class="eyebrow eyebrow-alert">CRITICAL INTERCEPT // MULTIVERSE WARNING</p>
+        <h2>ANOMALY DETECTED</h2>
+        <div class="divider"></div>
+        <p class="body-text">
+          Agent <span class="codename-tag" id="displayCodename2">AGENT</span>, canon event destabilization detected in Sector 50101. Do you confirm deployment?
+        </p>
+        <button id="confirmDeployBtn" class="btn btn-primary btn-glow">CONFIRM &amp; PROCEED &gt;</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: TICKET / DEPLOYMENT AGREEMENT (WITH GIF STICKERS) -->
+    <section id="screen-step3" class="screen">
       <div class="ticket-wrap">
         <div class="ticket glass" id="ticket">
+
+          <!-- GIF STICKERS -->
+          <div class="sticker sticker-top-right" aria-hidden="true">
+            <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXY2dzJpMm5pem9sM2hjYWt4cGlxMDJ4bmNjaWE0aG5uNml4N2pkaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/eE1fuNXzJvKKv2ngCq/giphy.gif" alt="Spider-Man Down">
+          </div>
+          <div class="sticker sticker-bottom-left" aria-hidden="true">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWF0dnl4dzQya3p0dGN4bGt2Y3E4dXk5ZmN6eDA1NWJsdzg1MTUwYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/pil9PnCbpfYVfv8ivK/giphy.gif" alt="Docor Octavos Dance">
+          </div>
+
           <div class="ticket-header">
-            <p class="eyebrow eyebrow-alert">OFFICIAL DEPLOYMENT TICKET</p>
+            <div>
+              <p class="eyebrow eyebrow-alert">OFFICIAL DEPLOYMENT TICKET</p>
+              <h1 id="ticketTitle">TACTICAL PASS</h1>
+            </div>
             <span class="stamp">CLASSIFIED</span>
           </div>
-          <h2 class="glitch" data-text="MISSION: APPROVED">MISSION: APPROVED</h2>
+
           <div class="divider"></div>
 
           <dl class="ticket-details">
             <div class="ticket-row">
-              <dt>ASSIGNED AGENT</dt>
-              <dd data-role="codename-display">AGENT</dd>
+              <dt>OPERATIVE CODENAME</dt>
+              <dd id="ticketCodename" class="codename-tag">UNKNOWN</dd>
             </div>
             <div class="ticket-row">
-              <dt>TARGET EVENT</dt>
-              <dd>Spider-Man: Brand New Day</dd>
+              <dt>CLEARANCE STATUS</dt>
+              <dd style="color: var(--cyan);">LEVEL 5 — GRANTED</dd>
             </div>
             <div class="ticket-row">
-              <dt>DEPLOYMENT DATE &amp; TIME</dt>
-              <dd>Friday, July 31 2026 &middot; 4:00 PM</dd>
+              <dt>SECTOR DESTINATION</dt>
+              <dd>NUEVA YORK (EARTH-928)</dd>
             </div>
             <div class="ticket-row">
-              <dt>RENDEZVOUS LOCATION</dt>
-              <dd>ROBINSONS/SM THEATER NAGA CITY</dd>
-            </div>
-            <div class="ticket-row">
-              <dt>DRESS CODE</dt>
-              <dd>Anything as long as you're comfortable.</dd>
+              <dt>CANON PROTECTION</dt>
+              <dd style="color: var(--red);">ACTIVE</dd>
             </div>
           </dl>
 
-          <div class="ticket-barcode" aria-hidden="true"></div>
+          <div class="ticket-barcode"></div>
+
+          <p class="body-text" style="font-size: 0.88rem; margin-bottom: 14px;">
+            ACCEPTANCE OF THIS DEPLOYMENT OBLIGATES OPERATIVE TO MAINTAIN CANON INTEGRITY AT ALL COSTS.
+          </p>
 
           <div class="ticket-actions" id="ticketActions">
-            <button id="acceptMissionBtn" class="btn btn-primary btn-glow">
-              <span>I ACCEPT THE MISSION</span>
-            </button>
-
-            <div class="decline-zone" id="declineZone">
-              <button id="declineBtn" class="btn btn-decline">
-                <span>DECLINE</span>
-              </button>
+            <button id="acceptBtn" class="btn btn-primary btn-glow" style="flex: 1.2;">ACCEPT DEPLOYMENT</button>
+            <div class="decline-zone">
+              <button id="declineBtn" class="btn btn-decline">ABORT MISSION</button>
             </div>
           </div>
 
-          <p class="confirmation-msg" id="confirmationMsg">ACCESS GRANTED. MISSION LOGGED SEE YOU!</p>
+          <p id="confirmationMsg" class="confirmation-msg">
+            &gt; DEPLOYMENT CONFIRMED. PREPARE FOR GO-HOME MACHINE PORTAL...
+          </p>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast"></div>
-
-  <!-- Tactical Footer -->
+  <!-- HUD Footer -->
   <footer class="hud-footer">
     <div class="hud-footer-content">
-      <span class="hud-status">// S.H.I.E.L.D. SECURE TRANSMISSION</span>
-      <span class="hud-copyright">&copy; OPERATION: BRAND NEW DAY. ALL RIGHTS RESERVED BY KIB</span>
+      <span class="hud-status">&gt; SPIDER-SOCIETY OS v4.0.9</span>
+      <span>CANON STATUS: STABLE</span>
+      <span>SYS.LOC: EARTH-928</span>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-  <script src="script.js"></script>
+  <!-- Toast Container -->
+  <div id="toast" class="toast"></div>
+
 </body>
 </html>
