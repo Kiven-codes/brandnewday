@@ -310,7 +310,7 @@ if (state.audioEnabled) tone({ freq: 500, duration: 0.08, type: "sine", gain: 0.
     showScreen(3);
   });
 
-  /* ---------------------------------------------------------------------
+/* ---------------------------------------------------------------------
      STEP 4 : DEPLOYMENT TICKET — ACCEPT MISSION
      --------------------------------------------------------------------- */
   acceptMissionBtn.addEventListener("click", () => {
@@ -319,6 +319,15 @@ if (state.audioEnabled) tone({ freq: 500, duration: 0.08, type: "sine", gain: 0.
     ticketEl.classList.add("accepted");
     confirmationMsg.classList.add("show");
     acceptMissionBtn.disabled = true;
+
+    // Trigger Sticker Pop-in Animation
+    const stickers = ticketEl.querySelectorAll(".sticker");
+    stickers.forEach((sticker, index) => {
+      // Add a tiny stagger delay between stickers for extra pop effect
+      setTimeout(() => {
+        sticker.classList.add("visible");
+      }, index * 150);
+    });
 
     if (window.confetti) {
       const colors = ["#ff0033", "#00e5ff", "#ffffff"];
@@ -345,7 +354,7 @@ if (state.audioEnabled) tone({ freq: 500, duration: 0.08, type: "sine", gain: 0.
       });
     }
   });
-
+  
   /* ---------------------------------------------------------------------
      STEP 4 : DECLINE — EVASIVE BUTTON MECHANICS
      --------------------------------------------------------------------- */
