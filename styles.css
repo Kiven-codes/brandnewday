@@ -1239,7 +1239,6 @@ h2.subheading {
   position: absolute;
   z-index: 10;
   pointer-events: none; /* Allows user to click buttons behind stickers */
-  filter: drop-shadow(0 0 12px rgba(255, 0, 51, 0.5));
   
   /* Initial hidden state */
   opacity: 0;
@@ -1250,8 +1249,15 @@ h2.subheading {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 8px;
-  border: none;
+  border-radius: 12px;
+  
+  /* STICKER BORDER & GLOW STYLING */
+  border: 2px solid var(--cyan);
+  outline: 2px solid var(--red);
+  box-shadow: 
+    0 0 12px rgba(0, 229, 255, 0.6),
+    0 0 24px rgba(255, 0, 51, 0.4),
+    inset 0 0 8px rgba(0, 229, 255, 0.3);
 }
 
 /* 1. Spider-Man (Top-Right) Sticker Sizing & Positioning */
@@ -1259,14 +1265,14 @@ h2.subheading {
 .sticker-top-right {
   top: -35px;
   right: -28px;
-  width: clamp(110px, 28vw, 170px); /* Made bigger */
+  width: clamp(110px, 28vw, 170px);
 }
 
 /* 2. Secondary (Bottom-Left) Sticker Sizing & Positioning */
 .sticker-bottom-left {
   bottom: 80px;
   left: -32px;
-  width: clamp(100px, 24vw, 150px); /* Made bigger */
+  width: clamp(100px, 24vw, 150px);
 }
 
 /* =========================================================================
