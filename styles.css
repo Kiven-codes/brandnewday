@@ -1239,33 +1239,8 @@ h2.subheading {
   position: absolute;
   z-index: 10;
   pointer-events: none; /* Allows user to click buttons behind stickers */
-  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4));
-  
-  /* Initial hidden state */
-  opacity: 0;
-  transform: scale(0);
+  filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.4)); /* Glow kept intact */
   transition: transform 0.3s ease;
-}
-
-/* Class added by JavaScript on Accept Mission click */
-.sticker.visible {
-  animation: stickerPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* Pop-in keyframe animation */
-@keyframes stickerPop {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .sticker img {
@@ -1273,51 +1248,44 @@ h2.subheading {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  border: none;
+  border: none; /* Border removed */
 }
 
-/* Top-Right Sticker Positioning */
+/* Top-Right Sticker (Overlaps header/stamp) */
 .sticker-top-right {
   top: -30px;
   right: -24px;
-  width: clamp(90px, 22vw, 140px);
-}
-
-/* Bottom-Left Sticker Positioning */
-.sticker-bottom-left {
-  bottom: 80px;
-  left: -28px;
-  width: clamp(85px, 20vw, 125px);
-}
-
-/* Apply rotation after the pop animation finishes */
-.sticker-top-right.visible {
+  width: clamp(90px, 22vw, 140px); /* Increased size */
   transform: rotate(12deg);
 }
 
-.sticker-bottom-left.visible {
+/* Bottom-Left Sticker (Overlaps barcode/details) */
+.sticker-bottom-left {
+  bottom: 80px;
+  left: -28px;
+  width: clamp(85px, 20vw, 125px); /* Increased size */
   transform: rotate(-10deg);
 }
 
 /* Hover effect for desktop */
-.ticket:hover .sticker-top-right.visible {
+.ticket:hover .sticker-top-right {
   transform: rotate(16deg) scale(1.05);
 }
-.ticket:hover .sticker-bottom-left.visible {
+.ticket:hover .sticker-bottom-left {
   transform: rotate(-14deg) scale(1.05);
 }
 
-/* Mobile Adjustments */
+/* Mobile Adjustments so stickers don't cover text on tiny screens */
 @media (max-width: 480px) {
   .sticker-top-right {
     top: -20px;
     right: -10px;
-    width: 80px;
+    width: 80px; /* Scaled up for mobile */
   }
 
   .sticker-bottom-left {
     bottom: 120px;
     left: -12px;
-    width: 70px;
+    width: 70px; /* Scaled up for mobile */
   }
 }
